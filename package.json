@@ -1,0 +1,26 @@
+{
+  "name": "bei-mssql",
+  "version": "1.0.0",
+  "description": "G6 Flow - Backend Integrator for Microsfot MSSQL",
+  "main": "index.js",
+  "scripts": {
+    "devel": "nodemon ./index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Adá Rodríguez",
+  "license": "ISC",
+  "dependencies": {
+    "mssql": "^9.1.1",
+    "@fastify/swagger": "^8.2.1",
+    "@fastify/swagger-ui": "^1.3.0",
+    "dotenv": "^16.0.3",
+    "fastify": "^4.10.2",
+    "fastify-plugin": "^4.4.0",
+    "fastify-swagger": "^5.2.0",
+    "node-cache": "^5.1.2",
+    "sqlite3": "^5.1.4",
+    "uuid": "^9.0.0",
+    "winston": "^3.8.2"
+  }
+}
