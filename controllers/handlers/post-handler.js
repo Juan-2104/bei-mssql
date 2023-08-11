@@ -23,10 +23,11 @@ function GetParams(row) {
 
 module.exports = async function PostHandler(req, reply) {
     try {
+        await ValidaAPIKey(req)
         logger.debug(`Entrando al POST de la tabla`)
         logger.debug(`Conectando a la base de datos`)
         const dbclient = await pool.connect()
-        let consulta = `INSERT INTO ${req.routeConfig.table} (${GetFields(req.body)}) VALUES (${GetParams(req.body)})`
+        let consulta = `INSERT INTO  ${req.routeConfig.dbschema}.${req.routeConfig.table} (${GetFields(req.body)}) VALUES (${GetParams(req.body)})`
         const request = new Request(dbclient);
         await Object.keys(req.body).forEach(key => {
             request.input(key, serializeValue(req.body[key]))

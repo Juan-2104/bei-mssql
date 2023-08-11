@@ -15,12 +15,13 @@ function GetFilter(filter) {
 
 module.exports =  async function GetWithParamsHandler(req, reply) {
     try {
+        await ValidaAPIKey(req)
         logger.debug(`Entrando al GET de la tabla`)
         logger.debug(`Conectando a la base de datos`)
         logger.debug(`ID Solicitado: ${req.params[req.routeConfig.identifier]}`)
         const dbclient = await pool.connect()
         // req.query.filter = `${beiConfigs.identifier} = '${req.params._id}'`
-        let consulta = `select ${GetFields(req.query.fields)} from ${req.routeConfig.table}  where "${req.routeConfig.identifier}" = ${req.params[req.routeConfig.identifier]}`
+        let consulta = `select ${GetFields(req.query.fields)} from  ${req.routeConfig.dbschema}.${req.routeConfig.table}  where "${req.routeConfig.identifier}" = ${req.params[req.routeConfig.identifier]}`
         logger.debug(`Consulta de insercion ${consulta}`)
         let results = await dbclient.query(consulta)
         logger.debug(`Ejecución de la consulta, EXITOSA. Filas obtenidas: ${results.rowsAffected.length}`)

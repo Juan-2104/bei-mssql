@@ -5,6 +5,7 @@ const fs = require('fs')
 const { v4: uuid4 } = require('uuid')
 const crypto = require('crypto');
 const { EncryptData, DecryptData } = require('../../utils/crypto-utils');
+const packageJson = require('../../package.json');
 dotenv.config();
 
 /******************************************************************************
@@ -97,9 +98,21 @@ async function PostMetadata(req, reply) {
     }
 }
 
+async function GetBEIVersion(req, reply) {
+    reply.code(200)
+    reply.send(
+        {
+            beiversion: packageJson.version,
+            beiname: packageJson.name,
+            beiauthor: packageJson.author
+        }
+    )
+}
+
 module.exports = {
     GetListConfig,
     PostConfig,
     GetMetadata,
     PostMetadata,
+    GetBEIVersion,
 }
