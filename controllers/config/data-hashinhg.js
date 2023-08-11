@@ -1,5 +1,6 @@
 const crypto = require('crypto');
 const { EncryptData, DecryptData } = require('../../utils/crypto-utils');
+const { ValidaAPIKey, NotAuthorizedError } = require('../../utils/secutils');
 
 async function PostAes256Crypto(req, reply) {
     try {

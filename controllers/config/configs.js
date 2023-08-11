@@ -6,7 +6,7 @@ const { v4: uuid4 } = require('uuid')
 const crypto = require('crypto');
 const { EncryptData, DecryptData } = require('../../utils/crypto-utils');
 const packageJson = require('../../package.json');
-const { ValidaAPIKey } = require('../../utils/secutils');
+const { ValidaAPIKey, NotAuthorizedError } = require('../../utils/secutils');
 dotenv.config();
 
 /******************************************************************************
