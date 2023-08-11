@@ -12,11 +12,12 @@ function GetFilter(filter) {
 
 module.exports =  async function DeleteHandler(req, reply) {
     try {
+        await ValidaAPIKey(req)
         logger.debug(`Entrando al GET de la tabla`)
         logger.debug(`Conectando a la base de datos`)
         const dbclient = await pool.connect()
         const request = new Request(dbclient);
-        let consulta = `DELETE from ${req.routeConfig.table}  where ${req.routeConfig.identifier} = @${req.routeConfig.identifier}`
+        let consulta = `DELETE from  ${req.routeConfig.dbschema}.${req.routeConfig.table}  where ${req.routeConfig.identifier} = @${req.routeConfig.identifier}`
         request.input(req.routeConfig.identifier,req.params[req.routeConfig.identifier])
         // req.query.filter = `${beiConfigs.identifier} = '${req.params._id}'`
         let results = await request.query(consulta)

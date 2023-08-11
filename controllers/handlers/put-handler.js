@@ -20,11 +20,12 @@ function GetFilter(filter) {
 
 module.exports =  async function PutHandler(req, reply) {
     try {
+        await ValidaAPIKey(req)
         logger.debug(`Entrando al PUT de la tabla`)
         logger.debug(`Conectando a la base de datos`)
         const dbclient = await pool.connect()
         // req.query.filter = `${beiConfigs.identifier} = '${req.params._id}'`
-        let consulta = `UPDATE ${req.routeConfig.table} SET ${GetFields(req.body)} where ${req.routeConfig.identifier} = @${req.routeConfig.identifier}`
+        let consulta = `UPDATE  ${req.routeConfig.dbschema}.${req.routeConfig.table} SET ${GetFields(req.body)} where ${req.routeConfig.identifier} = @${req.routeConfig.identifier}`
         logger.debug(`Consulta de insercion ${consulta}`)
         const request = new Request(dbclient);
         await Object.keys(req.body).forEach(key => {
