@@ -27,7 +27,7 @@ module.exports =  async function DeleteHandler(req, reply) {
         reply.send({status: 'OK', action: 'delete',eliminated_rows:  results.rowsAffected.length})
     } catch (error) {
         logger.error(`GetHandler::Ocurrio un error al intentar la operación:: ${error.message}`)
-        reply.code(500)
+        reply.code(error.status?error.status:500)
         reply.send({
             errorMessage: error.message
         })

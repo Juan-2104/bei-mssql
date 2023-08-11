@@ -6,6 +6,7 @@ const { v4: uuid4 } = require('uuid')
 const crypto = require('crypto');
 const { EncryptData, DecryptData } = require('../../utils/crypto-utils');
 const packageJson = require('../../package.json');
+const { ValidaAPIKey } = require('../../utils/secutils');
 dotenv.config();
 
 /******************************************************************************
@@ -18,6 +19,7 @@ FUNCIONES PARA SERVICIOS DE CONFIG
  */
 async function GetListConfig(req, reply) {
     try {
+        await ValidaAPIKey(req)
         let data = fs.readFileSync('data/config.json', 'utf-8')
         let config = await JSON.parse(data)
         logger.debug(`Esta fue la contraseña encriptada ${config.password}`)
@@ -25,7 +27,7 @@ async function GetListConfig(req, reply) {
         reply.code(200)
         reply.send(config)
     } catch (error) {
-        reply.code(500)
+        reply.code(error.status?error.status:500)
         reply.send({
             errorMessage: error.message
         })
@@ -34,6 +36,7 @@ async function GetListConfig(req, reply) {
 
 async function PostConfig(req, reply) {
     try {
+        await ValidaAPIKey(req)
         let config = req.body
         // Preparación de los campos generados por el BEI
         config._id= config._id?config._id: uuid4()
@@ -52,7 +55,7 @@ async function PostConfig(req, reply) {
             config
         )
     } catch (error) {
-        reply.code(500)
+        reply.code(error.status?error.status:500)
         reply.send({
             errorMessage: error.message
         })
@@ -65,12 +68,13 @@ FUNCIONES PARA SERVICIOS DE METADATA
 
 async function GetMetadata(req, reply) {
     try {
+        await ValidaAPIKey(req)
         let data = fs.readFileSync('data/metadata.json', 'utf-8')
         let metadata = await JSON.parse(data)
         reply.code(200)
         reply.send(metadata)
     } catch (error) {
-        reply.code(500)
+        reply.code(error.status?error.status:500)
         reply.send({
             errorMessage: error.message
         })
@@ -79,6 +83,7 @@ async function GetMetadata(req, reply) {
 
 async function PostMetadata(req, reply) {
     try {
+        await ValidaAPIKey(req)
         let metadata = req.body
         // Preparación de los campos generados por el BEI
         metadata._id= metadata._id?metadata._id: uuid4()
@@ -91,7 +96,7 @@ async function PostMetadata(req, reply) {
             metadata
         )
     } catch (error) {
-        reply.code(500)
+        reply.code(error.status?error.status:500)
         reply.send({
             errorMessage: error.message
         })

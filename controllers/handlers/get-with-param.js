@@ -30,7 +30,7 @@ module.exports =  async function GetWithParamsHandler(req, reply) {
         reply.send(results.recordset)
     } catch (error) {
         logger.error(`GetHandler::Ocurrio un error al intentar la operación:: ${error.message}`)
-        reply.code(500)
+        reply.code(error.status?error.status:500)
         reply.send({
             errorMessage: error.message
         })

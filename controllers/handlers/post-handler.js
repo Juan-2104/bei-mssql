@@ -40,7 +40,7 @@ module.exports = async function PostHandler(req, reply) {
         reply.send({status: 'OK', action: 'insert'})
     } catch (error) {
         logger.error(`PostHandler::Ocurrio un error al intentar la operación:: ${error.message}`)
-        reply.code(500)
+        reply.code(error.status?error.status:500)
         reply.send({
             errorMessage: error.message
         })

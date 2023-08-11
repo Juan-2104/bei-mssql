@@ -39,7 +39,7 @@ module.exports =  async function PutHandler(req, reply) {
         reply.send({status: 'OK', action: 'update'})
     } catch (error) {
         logger.error(`PostHandler::Ocurrio un error al intentar la operación:: ${error.message}`)
-        reply.code(500)
+        reply.code(error.status?error.status:500)
         reply.send({
             errorMessage: error.message
         })
