@@ -7,6 +7,7 @@ const pool = require('./connection-pool');
 const { isJson, serializeValues, serializeValue } = require('../../utils/json-eval');
 const TYPES = require("mssql").TYPES;
 const Request = require("mssql").Request;
+const {ValidaAPIKey, NotAuthorizedError} = require('../../utils/secutils');
 
 function GetFields(row) {
     return Object.keys(row).join(', ')

@@ -4,6 +4,7 @@ const logger = require('../../utils/bei-logger');
 const beiConfigs = require('../../data/config.json')
 // Configuración del pool de conexiones.
 const pool = require('./connection-pool')
+const {ValidaAPIKey, NotAuthorizedError} = require('../../utils/secutils');
 
 function GetFields(fields){
     return fields?fields:'*'

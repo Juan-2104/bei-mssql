@@ -5,6 +5,7 @@ const beiConfigs = require('../../data/config.json')
 // Configuración del pool de conexiones.
 const pool = require('./connection-pool');
 const { Request } = require('mssql');
+const {ValidaAPIKey, NotAuthorizedError} = require('../../utils/secutils');
 
 function GetFilter(filter) {
     return filter?`where ${filter}`:''

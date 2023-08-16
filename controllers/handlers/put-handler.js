@@ -6,6 +6,7 @@ const beiConfigs = require('../../data/config.json')
 const pool = require('./connection-pool');
 const { serializeValues, serializeValue } = require('../../utils/json-eval');
 const { Request } = require('mssql');
+const {ValidaAPIKey, NotAuthorizedError} = require('../../utils/secutils');
 
 function GetFields(row) {
     let pairs = Object.keys(row).map( (key, idx) => {
