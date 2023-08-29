@@ -1,7 +1,7 @@
 {
-  "name": "bei-mssql",
+  "name": "g6flow-bei-mssql",
   "version": "1.0.2",
-  "description": "G6 Flow - Backend Integrator for Microsfot MSSQL",
+  "description": "G6 Flow - Backend Integrator for MS-SQL Server",
   "main": "index.js",
   "scripts": {
     "devel": "nodemon ./index.js",

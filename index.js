@@ -21,8 +21,8 @@ const fastify = require("fastify")({
 fastify.register(require('@fastify/swagger'), {
   swagger: {
     info: {
-      title: 'G6Flow - BEI',
-      decription: 'Backend Integration componentes to allow interaction with DB objetcs',
+      title: packageJson.name,
+      decription: packageJson.description,
       version: packageJson.version
     },
     securityDefinitions: {

@@ -109,6 +109,7 @@ async function GetBEIVersion(req, reply) {
         {
             beiversion: packageJson.version,
             beiname: packageJson.name,
+            beidescription: packageJson.description,
             beiauthor: packageJson.author
         }
     )
